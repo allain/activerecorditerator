@@ -32,8 +32,8 @@ class ActiveRecordIterator implements Iterator {
     private $pagination = null;
 
     function __construct(CActiveDataProvider $activeDataProvider, $batchSize=ActiveRecordIterator::DEFAULT_BATCH_SIZE) {
-        $this->provider = $activeDataProvider;
-        $this->batchSize = $batchSize;
+        $this->provider = $activeDataProvider;                 
+        $this->batchSize = intval($batchSize) ? intval($batchSize) : ActiveRecordIterator::DEFAULT_BATCH_SIZE;
         $this->pagination = $this->provider->getPagination();
         $this->pagination->setPageSize($batchSize);
         $this->totalRecordCount = $this->provider->getTotalItemCount();
